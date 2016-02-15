@@ -1,4 +1,0 @@
-a new text file.
-hello
-world
-continue

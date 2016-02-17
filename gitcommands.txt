@@ -1,0 +1,63 @@
+---config git---
+git config --global user.name "Your name"
+git config --global user.email "Youremail@email.com"
+
+git init
+
+---add/rm & commit &status---
+git add filename
+git commit -m "readable log"
+
+git status
+
+git diff
+//git diff：是查看working tree与index file(stage)的差别的。
+git diff --cached：是查看index file与commit(Repository)的差别的。
+git diff HEAD：是查看working tree和commit的差别的。（你一定没有忘记，HEAD代表的是最近的一次commit的信息）
+
+git log
+git log --pretty=oneline
+
+git reset --hard HEAD^
+//在Git中，用HEAD表示当前版本，也就是最新的提交3628164...882e1e0（注意我的提交ID和你的肯定不一样），上一个版本就是HEAD^，上上一个版本就是HEAD^^，当然往上100个版本写100个^比较容易数不过来，所以写成HEAD~100。
+git reset --hard 362816<commit id>
+git reflog 
+
+git checkout -- filename 
+//git checkout -- file可以丢弃工作区的修改
+
+git rm filename
+git commit -m "readable log"
+
+//提交代码的更改一共分2个阶段。
+
+1).从工作目录，提交到stage。
+2).从stage提交到master。
+
+从工作目录提交到stage，需要用add或者rm命令，只提交到stage，而没有提交到master，是不会自动同步到master的。
+
+从stage提交到master用commit命令。
+
+退回也是要分两步，一个是从master退回到stage，然后再从stage退回到工作目录。
+
+对于还没有提交到stage的，可以从stage用checkout命令退回，这一步会取stage中的文件状态，覆盖掉工作目录中文件的状态，跟master完全没关系。
+
+对于已经到达stage的，想把state中的文件状态用master中的覆盖掉，就用reset命令，这样就把stage中修改用master的状态覆盖掉了，完全跟工作目录没关系
+
+---远程仓库创建---
+第1步：创建SSH Key。在用户主目录下，看看有没有.ssh目录，如果有，再看看这个目录下有没有id_rsa和id_rsa.pub这两个文件，如果已经有了，可直接跳到下一步。如果没有，打开Shell（Windows下打开Git Bash），创建SSH Key：
+ssh-keygen -t rsa -C "youremail@example.com"
+第2步：登陆GitHub，打开“Account settings”，“SSH Keys”页面“Add SSH Key”，填上任意Title，在Key文本框里粘贴id_rsa.pub文件的内容
+
+---添加远程库---
+GitHub.com => Create a new repo e.g:[example]
+git remote add origin git@github.com:bravesnail/examplg.git
+git push -u origin master
+//要关联一个远程库，使用命令git remote add origin git@server-name:path/repo-name.git；
+
+关联后，使用命令git push -u origin master第一次推送master分支的所有内容；
+
+此后，每次本地提交后，只要有必要，就可以使用命令git push origin master推送最新修改；
+
+---从远程库克隆---
+git clone git@github.com:bravesnail/example.git

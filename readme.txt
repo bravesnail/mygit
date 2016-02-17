@@ -1,2 +1,1 @@
-version 1 ---test
->>>>>>> test
+version 2 ---test

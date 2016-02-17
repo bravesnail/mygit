@@ -4,4 +4,4 @@ OK,i'm ready!
 it's line 4,the end!
 just wan
 creating a new branch dev
-conflict master
+conflict test1
